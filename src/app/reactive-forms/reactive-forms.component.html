@@ -1,0 +1,14 @@
+<form [formGroup]="characterForm" (submit)="save()">
+
+  <div class="form-group">
+    <label for="name">Character name</label>
+    <input type="text" class="form-control" formControlName="name" id="name" name="name">
+  </div>
+  <span class="help-block" *ngIf="characterForm.get('name').invalid && characterForm.get('name').touched">Required!</span>
+
+  <button type="submit" class="btn btn-danger" [disabled]="!characterForm.valid">Submit</button>
+
+</form>
+
+
+
