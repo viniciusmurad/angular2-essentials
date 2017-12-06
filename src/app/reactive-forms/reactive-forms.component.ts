@@ -1,3 +1,4 @@
+import { ItemsService } from '../items.service';
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -11,7 +12,7 @@ export class ReactiveFormsComponent implements OnInit {
 
   characterForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private itemService: ItemsService) { }
 
   ngOnInit() {
     this.characterForm = this.formBuilder.group({
@@ -20,9 +21,7 @@ export class ReactiveFormsComponent implements OnInit {
   }
 
   save() {
-    if (this.characterForm.dirty && this.characterForm.valid) {
-      alert(`Name: ${this.characterForm.value.name}`);
-    }
+    this.itemService.addCharacter(this.characterForm.value.name, '');
   }
 
 }

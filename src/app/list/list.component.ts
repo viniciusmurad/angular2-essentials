@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ItemsService } from './../items.service';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -7,16 +9,16 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  @Input() characters;
-  // @Output() sideAssigned = new EventEmitter<{name: string, side: string}>();
+  characters = [];
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private itemService: ItemsService) { }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(
+      (params) => {
+        this.characters = this.itemService.getCharacters(params.side);
+      }
+    )
   }
-
-  // onSideAssigned(charInfo) {
-  //   this.sideAssigned.emit(charInfo);
-  // }
 
 }

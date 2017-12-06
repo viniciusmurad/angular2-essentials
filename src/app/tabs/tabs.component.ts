@@ -10,29 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsComponent implements OnInit {
 
-  characters = [];
-
-  chosenList = 'all';
-
-  constructor(private itemsService: ItemsService) { }
+  constructor() { }
 
   ngOnInit() {
     // this.itemService.itemSubject.subscribe((sub) => {
     //   this.onSideChosen(sub);
     // })
   }
-
-  onChoose(side) {
-    this.chosenList = side;
-  }
-
-  getCharacters() {
-
-    this.characters = this.itemsService.getCharacters(this.chosenList);
-    return this.characters;
-
-  }
-
-
 
 }
