@@ -3,6 +3,8 @@ import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { ROUTES } from './app.routes';
+
 import { AppComponent } from './app.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ListComponent } from './list/list.component';
@@ -14,14 +16,6 @@ import { CreateCharacterComponent } from './create-character/create-character.co
 import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
 import { HeaderComponent } from './header/header.component';
 
-const routes = [
-  {path: 'characters', component: TabsComponent, children: [
-    {path: '', redirectTo: 'all', pathMatch: 'full'},
-    {path: ':side', component: ListComponent}
-  ]},
-  {path: 'new-character', component: CreateCharacterComponent},
-  {path: '**', redirectTo: '/characters'}
-]
 
 @NgModule({
   declarations: [
@@ -37,7 +31,7 @@ const routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [ItemService, ItemsService, LogService],
   bootstrap: [AppComponent]
