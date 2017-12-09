@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { LogService } from './log.service';
 
@@ -8,6 +9,8 @@ export class ItemsService {
     {name: 'Item 1', side: ''},
     {name: 'Item 2', side: ''}
   ]
+
+  charactersChanged = new Subject();
 
   constructor(private logService: LogService) { }
 
@@ -26,6 +29,7 @@ export class ItemsService {
       return char.name === charInfo.name;
     })
     this.characters[pos].side = charInfo.side;
+    this.charactersChanged.next();
     this.logService.writeLog('Changed side of ' + charInfo.name + ', new side: ' + charInfo.side);
   }
 
