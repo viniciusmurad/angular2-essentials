@@ -15,6 +15,7 @@ import { LogService } from './log.service';
 import { CreateCharacterComponent } from './create-character/create-character.component';
 import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
 import { HeaderComponent } from './header/header.component';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { HeaderComponent } from './header/header.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    HttpModule
   ],
   providers: [ItemService, ItemsService, LogService],
   bootstrap: [AppComponent]

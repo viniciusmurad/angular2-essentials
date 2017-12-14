@@ -1,18 +1,35 @@
 import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { LogService } from './log.service';
+import 'rxjs/add/operator/map';
+import { Http, Response } from '@angular/http';
 
 @Injectable()
 export class ItemsService {
 
-  private characters = [
-    {name: 'Item 1', side: ''},
-    {name: 'Item 2', side: ''}
-  ]
+  private characters = [];
 
   charactersChanged = new Subject();
 
-  constructor(private logService: LogService) { }
+  constructor(private logService: LogService, private http: Http) { }
+
+  fetchCharacters() {
+    this.http.get('https://swapi.co/api/people')
+      .map((response: Response) => {
+        const data = response.json();
+        const extractedChars = data.results;
+        const chars = extractedChars.map((char) => {
+          return {name: char.name, side: ''};
+        });
+        return chars;
+      })
+      .subscribe(
+        (data) => {
+          this.characters = data;
+          this.charactersChanged.next();
+        }
+    );
+  }
 
   getCharacters(chosenList) {
 
