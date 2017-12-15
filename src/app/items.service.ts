@@ -3,33 +3,48 @@ import { Injectable } from '@angular/core';
 import { LogService } from './log.service';
 import 'rxjs/add/operator/map';
 import { Http, Response } from '@angular/http';
+import { HttpService } from './http.service';
 
 @Injectable()
 export class ItemsService {
 
-  private characters = [];
+  characters = [];
 
   charactersChanged = new Subject();
 
-  constructor(private logService: LogService, private http: Http) { }
+  constructor(private logService: LogService, private http: Http, private httpService: HttpService) { }
 
   fetchCharacters() {
-    this.http.get('https://swapi.co/api/people')
-      .map((response: Response) => {
-        const data = response.json();
+    this.httpService.getCharacters()
+      .subscribe((data) => {
+        console.log(data)
         const extractedChars = data.results;
         const chars = extractedChars.map((char) => {
           return {name: char.name, side: ''};
         });
-        return chars;
-      })
-      .subscribe(
-        (data) => {
-          this.characters = data;
-          this.charactersChanged.next();
-        }
-    );
+
+        this.characters = chars;
+        this.charactersChanged.next();
+      });
   }
+
+  // fetchCharacters() {
+  //   this.http.get('https://swapi.co/api/people')
+  //     .map((response: Response) => {
+  //       const data = response.json();
+  //       const extractedChars = data.results;
+  //       const chars = extractedChars.map((char) => {
+  //         return {name: char.name, side: ''};
+  //       });
+  //       return chars;
+  //     })
+  //     .subscribe(
+  //       (data) => {
+  //         this.characters = data;
+  //         this.charactersChanged.next();
+  //       }
+  //   );
+  // }
 
   getCharacters(chosenList) {
 

@@ -12,6 +12,7 @@ import { ItemComponent } from './item/item.component';
 import { ItemService } from './item.service';
 import { ItemsService } from './items.service';
 import { LogService } from './log.service';
+import { HttpService } from './http.service';
 import { CreateCharacterComponent } from './create-character/create-character.component';
 import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
 import { HeaderComponent } from './header/header.component';
@@ -35,7 +36,7 @@ import { HttpModule } from '@angular/http';
     RouterModule.forRoot(ROUTES),
     HttpModule
   ],
-  providers: [ItemService, ItemsService, LogService],
+  providers: [ItemService, ItemsService, LogService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

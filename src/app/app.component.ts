@@ -13,5 +13,6 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.itemService.fetchCharacters();
+    // this.itemService.fetchCharactersX();
   }
 }
